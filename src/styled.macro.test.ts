@@ -8,14 +8,23 @@ async function transformCode(code: string) {
     plugins: ["babel-plugin-macros"],
   });
 }
+const code = `
+import styled from "./styled.macro.js";
 
-describe("test test", () => {
-  const code = `import styled from "./styled.macro.js"; styled();`;
+const MyComponent = styled.div(\`
+  background-color: #f00;
+\`);`;
 
-  test("it calls console.log", async () => {
-    const spy = jest.spyOn(console, "log").mockImplementation(() => {});
+const transformedCode = `
+const MyComponent = ({
+  children,
+  ...props
+}) => React.createElement('div', props, children);
+`.trim();
+
+describe("styled macro", () => {
+  test("styled call is replaced with react component", async () => {
     const result = await transformCode(code);
-    expect(result.code).toBe("styled();");
-    expect(spy).toHaveBeenCalled();
+    expect(result.code).toBe(transformedCode);
   });
 });

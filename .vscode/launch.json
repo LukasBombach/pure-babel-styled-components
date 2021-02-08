@@ -16,7 +16,7 @@
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "port": 9229,
-      "runtimeExecutable": "/Users/luke/.nvm/versions/node/v15.5.0/bin/node"
+      "runtimeExecutable": "/Users/luke/.nvm/versions/node/v15.8.0/bin/node"
     }
   ]
 }

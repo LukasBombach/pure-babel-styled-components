@@ -1,16 +1,22 @@
 import { createMacro } from "babel-plugin-macros";
+import { parse } from "@babel/parser";
 
-function myMacro({ references }) {
-  // state is the second argument you're passed to a visitor in a
-  // normal babel plugin. `babel` is the `babel-plugin-macros` module.
-  // do whatever you like to the AST paths you find in `references`
-  // read more below...
-  debugger;
-  console.log(references);
+export default createMacro(({ references, babel }) => {
+  const { types: t } = babel;
+
+  references.default.forEach(reference => {
+    if (reference.parentPath.parentPath.type === "CallExpression") {
+      const tag = reference.parentPath.get("property").get("name").node;
+      const replacement = getCreateElementAst(tag);
+      // debugger;
+      reference.parentPath.parentPath.replaceWith(replacement);
+    }
+  });
+});
+
+function getCreateElementAst(tag) {
+  const result = parse(
+    `({children, ...props}) => React.createElement('${tag}', props, children);`
+  );
+  return result.program.body[0];
 }
-
-// `createMacro` is simply a function that ensures your macro is only
-// called in the context of a babel transpilation and will throw an
-// error with a helpful message if someone does not have babel-plugin-macros
-// configured correctly
-export default createMacro(myMacro);
