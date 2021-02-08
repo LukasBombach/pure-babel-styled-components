@@ -5,6 +5,7 @@ function myMacro({ references }) {
   // normal babel plugin. `babel` is the `babel-plugin-macros` module.
   // do whatever you like to the AST paths you find in `references`
   // read more below...
+  debugger;
   console.log(references);
 }
 
