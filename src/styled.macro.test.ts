@@ -1,7 +1,7 @@
 const { resolve } = require("path");
 const { transformAsync } = require("@babel/core");
 
-async function transformCode(code) {
+async function transformCode(code: string) {
   return await transformAsync(code, {
     cwd: resolve(__dirname),
     filename: "code.js",
@@ -10,7 +10,7 @@ async function transformCode(code) {
 }
 
 describe("test test", () => {
-  const code = `const styled = require("./styled.macro.js"); styled();`;
+  const code = `import styled from "./styled.macro.js"; styled();`;
 
   test("it calls console.log", async () => {
     const spy = jest.spyOn(console, "log").mockImplementation(() => {});
