@@ -14,7 +14,6 @@ export class StyledBackend {
       }
       const className = `s${++this.nextId}`;
       this.values[key] = { className, prop, value };
-
       return className;
     });
   }

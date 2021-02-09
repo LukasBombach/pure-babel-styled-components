@@ -17,9 +17,10 @@ const MyComponent = styled.div(\`
 
 const transformedCode = `
 const MyComponent = ({
-  children,
-  ...props
-}) => React.createElement('div', props, children);
+  children
+}) => React.createElement('div', {
+  className: 's0'
+}, children);
 `.trim();
 
 describe("styled macro", () => {
