@@ -11,6 +11,7 @@
     "@babel/parser": "7.12.15",
     "@babel/preset-env": "7.12.13",
     "@babel/preset-typescript": "7.12.13",
+    "@babel/template": "7.12.13",
     "@types/babel-plugin-macros": "2.8.4",
     "@types/jest": "26.0.20",
     "@types/node": "14.14.25",
